@@ -82,3 +82,49 @@ console.log(text);
 
 console.log(text.slice(0, 3));
 console.log(surreageAwareSlice(text, 0, 3));
+
+let counter = {
+  start: 0,
+  end: 100,
+
+  current: 0,
+
+  //  First way to declare a function inside an object
+  c() {
+    console.log(`i'm c`);
+  },
+
+  // Second way to declare a function inside an object
+  cc: function () {
+    console.log(`i'm cc`);
+    return this;
+  },
+
+  // Create an iterator
+  [Symbol.iterator]() {
+    // Initialize the counter
+    this.current = this.start;
+    // Return the itarator
+    return this;
+  },
+
+  // Create a next method which will be called by the iterator
+  next() {
+    //  Check if the current value is bigger then the target value
+    if (this.current <= this.end) {
+      // If so, the iterator not finished thus the done:false,
+      // Return the current value and increase it at the same time
+      return { done: false, value: this.current++ };
+    } else {
+      // The iteration is done
+      return { done: true };
+    }
+  },
+};
+
+// console.log(counter.cc());
+// console.log(counter.c());
+
+for (let c of counter) {
+  console.log(c);
+}
