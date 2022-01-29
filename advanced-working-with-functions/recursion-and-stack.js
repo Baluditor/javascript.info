@@ -1,3 +1,7 @@
+"use strict";
+
+import { data } from "./data.js";
+
 // Sum all numbers till the given one
 // importance: 5
 // Write a function sumTo(n) that calculates the sum of numbers 1 + 2 + ... + n.
@@ -191,3 +195,37 @@ function printListReverseRecursion(list) {
 
 printReverseList(list);
 printListReverseRecursion(list);
+
+const rootFolders = data.filter((d) => {
+  if (d.parentIds)
+    return d.parentIds.includes("04ca1bffeebab6c09c42247b5bc61246");
+  return false;
+});
+
+console.log(rootFolders.length);
+console.log(data.length);
+
+const createDataTree = (dataset) => {
+  const hashTable = Object.create(null);
+
+  dataset.forEach(
+    (aData) => (hashTable[aData.id] = { ...aData, childNodes: [] })
+  );
+  return hashTable;
+};
+
+console.log(createDataTree(data.slice(0, 19)));
+
+// const createDataTree = (dataset) => {
+//   const hashTable = Object.create(null);
+//   dataset.forEach(
+//     (aData) => (hashTable[aData.ID] = { ...aData, childNodes: [] })
+//   );
+//   const dataTree = [];
+//   dataset.forEach((aData) => {
+//     if (aData.parentID)
+//       hashTable[aData.parentID].childNodes.push(hashTable[aData.ID]);
+//     else dataTree.push(hashTable[aData.ID]);
+//   });
+//   return dataTree;
+// };
